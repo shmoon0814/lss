@@ -1,25 +1,4 @@
-Skip to content
- 
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@shmoon0814 
-Learn Git and GitHub without any code!
-Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
-
- 
-1
-0 0 shmoon0814/shmoonlss
- Code  Issues 0  Pull requests 0  Projects 0  Wiki  Security  Insights  Settings
-shmoonlss/README.md
-@shmoon0814 shmoon0814 Update README.md
-887311d 13 minutes ago
-51 lines (38 sloc)  1.86 KB
-    
+   
 2019년 8월 31일 맥북이 없어서 윈도우에 개발환경 셋팅중..
 
 windows10 에서 지원하는 리눅스 깔아서 웹서버 nginx 띄웠다. (리눅스)
