@@ -1,8 +1,7 @@
-package i.wanna.watcha.MPD;
+package i.wanna.mpeg.MPD;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;

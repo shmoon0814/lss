@@ -1,4 +1,4 @@
-package i.wanna.watcha;
+package i.wanna.mpeg;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

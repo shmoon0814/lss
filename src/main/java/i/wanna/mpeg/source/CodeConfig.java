@@ -1,4 +1,4 @@
-package i.wanna.watcha.source;
+package i.wanna.mpeg.source;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

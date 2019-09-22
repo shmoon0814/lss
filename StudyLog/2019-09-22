@@ -1,0 +1,38 @@
+요즘 이것저것 이력서도 써보고 했는대 영.. 집중이 안된다.. 능력부족이지.. 뭐.. 별수있냐 열심히 허자
+
+세그먼트 파일네임 명령 가이드라인 이랍신다
+
+배포를 위한 DASH 콘텐츠를 준비하기 위해서는 암호화된 세그먼트에 고유한 이름을 부여하여 해당 저장소를
+동일한 위치에 저장하고 MPD 파일에서 참조하도록 하는 것이 중요하다.
+
+이 절에서는 파일 이름에 대한 내용 매개 변수의 매핑을 기반으로 파일 이름 생성을 위한
+권장 프로세스를 제공한다. 이 프로세스는 정적 내용 매개변수와 세그먼트 템플릿 요소에 의해
+활성화된 $number$ 및 $time$ 과 같은 동적 매개변수 매핑이 포함된다.
+
+1. segment url generation
+
+콘텐츠 매개 변수 url 에 매핑하려면 표 1에서 제공하는 키 / 쌍 값 집함을 사용하세요.
+
+Table 1 - Key/value pairs for segment URL generation
+
+Filed prefix    Correspoding MPD variable      Restriction
+M               MPD@id                         얘는 id에 _ 들어가면 안됨. only 영어, 숫자만 가능 ex)e3923 요론식
+I (대문자 I)    Period@id                      얘는 id에 _ 들어가면 안됨. only 영어, 숫자만 가능 ex)e3923 요론식
+A               AdaptationSet@id
+g               AdaptationSet@group
+l (소문자 l)    AdaptationSet@lang
+P               AdaptationSet@par
+R               Representaion@id               얘는 id에 _ 들어가면 안됨. only 영어, 숫자만 가능 ex)e3923 요론식
+B               Representaion@bandwidth
+W               Common@width
+H               Common@height
+s               Common@sar
+F               Common@framerate
+F               Common@audioSamplingRate
+N               $Number$
+T               $Time$
+C               Common@codecs
+
+오오 이거 맵핑으로 만들어야겠다.
+
+SegmentUrlCode Enum 에 만들어 놨다. 아마 이런 형태 코드를 더 쓸일이 없을 것 같아서 인터페이스는 따로 만들지 않았다.

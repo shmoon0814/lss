@@ -1,4 +1,4 @@
-package i.wanna.watcha.source;
+package i.wanna.mpeg.source;
 
 public interface CodeInter {
     String getCode();

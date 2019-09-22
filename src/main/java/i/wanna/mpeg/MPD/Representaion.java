@@ -1,4 +1,4 @@
-package i.wanna.watcha.MPD;
+package i.wanna.mpeg.MPD;
 
 public class Representaion {
 }
