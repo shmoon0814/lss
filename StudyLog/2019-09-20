@@ -1,0 +1,22 @@
+1. 오디오 컨텐츠 생성
+
+대역폭 적응을 지원하기 위해 오디오 콘텐츠는 다음을 포함하는 다원율로 인코딩 되어야 한다.
+
+이런건..
+@bandwidth 어트리뷰트에 MPD 어뎁터 셋에 정의되어야 한다.
+
+코덱, 샘플리 속도 및 채널 구성과 같은 오디오 인코딩 특성은
+@codec, @audioSamplingRate 및 AudioChannelConfiguration 속성을 통해
+통신 표현 및 적응 세트. 추가 특성은 또한 다음을 통해 신호할 수 있다.
+필수 스키마 등 뭐가 적용되지 않는이상
+오디어 데이터를 전달하는 미디어 세그먼트는 첫번째 액세스 유닛이 SAP 역할을 하는
+SAP1 유형으로 전달해야 한다.
+
+2. 오디오 제한사항
+디코더 출력의 불연속성을 방지하려면 다음 파라미터가 전체에서 동일해야 한다.
+ - Audio object type of the audio codec
+ - Channel Configuration (채널 구성)
+ - Sampling frequency (샘플링 주파수)
+
+3.  Delay alignment (지연 정렬)
+모든 비트 스트림은 지연 조정 되어야 한다..
