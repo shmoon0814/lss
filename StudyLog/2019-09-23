@@ -1,0 +1,64 @@
+우왕 드디어 샘플이다..
+샘플을 보기 전에 다시 한번 보자..
+MPD 파일 안에 Period 있고
+Period 안에 Adapter Set 있고
+Adapter SEt 안에 Representaino 정보있고
+Representaion 안에 Segment Information 있다.
+
+내안에 너있냐...
+
+Examples!!
+
+Segment file names
+www.example.com/SomeMovie_w720_h480_b500k_V_n00278.m4v
+www.example.com/SomeMovie_f44100_b32k_A_n00172.m4a
+www.example.com/SomeMovie_f24_w1920_h1080_cavc1-648028_b4000k_V.m4v
+
+이거 뭐 어쩌라고..?
+<BaseURL>SomeMovie_</BaseURL>
+<AdaptationSet
+  mimeType="video/mp4"
+  codecs="avc1.648028"
+  frameRate="24"
+  segmentAlignment="true"
+  bitstreamSwitching="true"
+  startWithSAP="2"
+  subsegmentStartsWithSAP="2">
+
+  <SegmentTemplate
+    media="$RepresentationID$_V_n$Number%05$.m4v"
+    duration="4"
+    startNumber="1"/>
+
+  <Representation
+    id="b4000K_w1920_h1080_f24_cavc1-648028"
+    bandwidth="4000000" width="1920" height="1080" />
+
+이게 뭐 어쩌라는거야 도대체...? 어..? 아 생각났다..
+9월 22일꺼 정리해둔거 보면은
+
+첫번째꺼
+www.example.com/SomeMovie_w720_h480_b500k_V_n00278.m4v
+해석
+BaseUrl = SomeMovie
+_w (width) = 720
+_h (height) = 480
+_b (bandwidth) = 500k
+뭐 이런식으로 해석하는거다 ㅇㅋ??
+대충 이해했어 지금은 이해가 잘 안가니 일단 킵 하고 다음 Figure 10 문서를 봐야겠다
+뭐 대강 비슷하다
+음.. 기술 스팩 자체는 그만 봐도 될꺼 같다. 면접이 잡힐 경우 좀더 자세하게 볼 필요가 있겠다.
+
+내가 잘못생각하고 있는건가??
+Java 서버가 필요한가??
+Segment는 요청할 비디오를 요청할 주소가 들어있고
+해당 세그먼트의 영상을 tcp 혹은 udp로 전홍 후 다음 세그먼트가 호출되면
+다음 영상을 tcp로 가져와서 비디오에 트는것 뿐인대..
+
+1. 영상을 올린다.
+2. 영상을 컨버팅해서 쪼개서 웹서버에 올린다
+3. 웹서버에 올린 영상의 정보를 MPD 파일로 만든다
+4. MPD파일을 해석할 웹브라우저(혹은 플레이어)의 파서가 필요하다 정도로 마무리지을수 있지 않을까?
+5. 결국 필요한건 Java 뭐 시기가 아니라 ffmpeg 아니냐??
+
+ffmpeg 이거 찾아봐야한다..

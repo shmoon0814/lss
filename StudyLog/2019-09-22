@@ -16,23 +16,27 @@
 Table 1 - Key/value pairs for segment URL generation
 
 Filed prefix    Correspoding MPD variable      Restriction
-M               MPD@id                         얘는 id에 _ 들어가면 안됨. only 영어, 숫자만 가능 ex)e3923 요론식
-I (대문자 I)    Period@id                      얘는 id에 _ 들어가면 안됨. only 영어, 숫자만 가능 ex)e3923 요론식
-A               AdaptationSet@id
+M               MPD@id                         (1)얘는 id에 _ 들어가면 안됨. only 영어, 숫자만 가능 ex)e3923 요론식
+I (대문자 I)    Period@id                      (1)얘는 id에 _ 들어가면 안됨. only 영어, 숫자만 가능 ex)e3923 요론식
+A               AdaptationSet@id                (1)얘는 id에 _ 들어가면 안됨. only 영어, 숫자만 가능 ex)e3923 요론식
 g               AdaptationSet@group
-l (소문자 l)    AdaptationSet@lang
-P               AdaptationSet@par
-R               Representaion@id               얘는 id에 _ 들어가면 안됨. only 영어, 숫자만 가능 ex)e3923 요론식
+l (소문자 l)    AdaptationSet@lang             (3) 화이트 스페이스 구문 목록은 두 개의 개별 필드로 작성되어야 한다. ex) lang="en es" "_len_les" 이런식
+P               AdaptationSet@par              (2) ".", "/", ":" 등의 문자는 "-" 로 표기되어야 한다 ex)f24000-1001 이런식
+R               Representaion@id               (1)얘는 id에 _ 들어가면 안됨. only 영어, 숫자만 가능 ex)e3923 요론식
 B               Representaion@bandwidth
 W               Common@width
 H               Common@height
-s               Common@sar
-F               Common@framerate
-F               Common@audioSamplingRate
-N               $Number$
-T               $Time$
-C               Common@codecs
+s               Common@sar                      (2) ".", "/", ":" 등의 문자는 "-" 로 표기되어야 한다 ex)f24000-1001 이런식
+F               Common@framerate                (2) ".", "/", ":" 등의 문자는 "-" 로 표기되어야 한다 ex)f24000-1001 이런식
+F               Common@audioSamplingRate        (2) ".", "/", ":" 등의 문자는 "-" 로 표기되어야 한다 ex)f24000-1001 런식
+N               $Number$                        (4) 세그먼트 번호는 최소 5자리 폭에 0을 더해야한다 ex) $Number%05$ 로 표시
+                                                (5) 세그먼트 번호 또는 시간은 파일 확장자 이전의 가장 오른쪽 문자, 즉 파일 확장자와 $Number$ 또는 $Time$가
+                                                존재하는 경우 도트 구분 파일 확장자만 이를 따를 수 있는 방식으로 URL이 생성된다
+                                                (9) 초기화 세그먼트는 $Number$ 위치에서 0을 포함하며, $Number$은 0을 추가하지 않는다.
+T               $Time$                          (5)세그먼트 번호 또는 시간은 파일 확장자 이전의 가장 오른쪽 문자, 즉 파일 확장자와
+                                                Number$ 또는 $Time$가 존재하는 경우 도트 구분 파일 확장자만 이를 따를 수 있는 방식으로 URL이 생성된다
+C               Common@codecs                   (2) ".", "/", ":" 등의 문자는 "-" 로 표기되어야 한다 ex)f24000-1001 이런식
 
 오오 이거 맵핑으로 만들어야겠다.
-
 SegmentUrlCode Enum 에 만들어 놨다. 아마 이런 형태 코드를 더 쓸일이 없을 것 같아서 인터페이스는 따로 만들지 않았다.
+근대 제약사항이 함수로 구현하기가 좀 어렵내...
