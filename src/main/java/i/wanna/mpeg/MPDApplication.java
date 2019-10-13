@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WatchaApplication {
+public class MPDApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(WatchaApplication.class, args);
+		SpringApplication.run(MPDApplication.class, args);
 	}
 }
 

@@ -13,16 +13,17 @@ import java.io.File;
 @Service
 public class FfmpegService {
 
-    //private String inputPath = "C:/video/SampleVideo_1280x720_30mb.mp4";
-    private String inputPath = "C:/video/1080p_sample1.mp4";
-
+    private String inputPath = "C:/video/SampleVideo_1280x720_30mb.mp4";
+    //private String inputPath = "C:/video/1080p_sample1.mp4";
     private String outputPath = "C:/video/output/";
+
     private static final Integer cutDuration = 20;
     private final FFmpeg fFmpeg;
     private final FFprobe fFprobe;
-    private String frame [] = {"cga", "ega","hd480","hd720","hd1080"};
+    //private String frame [] = {"cga", "ega","hd480","hd720","hd1080"};
     //private String resolution [] = {"scale=320:200", "scale=640:350","scale=852:480","scale=1280:720","scale=1920:1080"};
-    private String resolution [] = {"scale=320:200", "scale=640:350","scale=852:480"};
+    private String frame [] = {"cga"};
+    private String resolution [] = {"scale=320:200"};
     public FfmpegService() throws Exception{
         this.fFmpeg = new FFmpeg("C:\\ffmpeg\\bin\\ffmpeg.exe");
         this.fFprobe = new FFprobe("C:\\ffmpeg\\bin\\ffprobe.exe");
@@ -40,10 +41,10 @@ public class FfmpegService {
         //비트레이트가 화질의 수이다....
     }
 
-    public void wrapper() throws Exception {
+    public String wrapper() throws Exception {
         double duration = checkFile();
         if(duration < 100){
-            return;
+            return "DONE";
         }else{
             double value = duration / cutDuration;
             Double value2 = Math.floor(value);
@@ -55,9 +56,11 @@ public class FfmpegService {
                 cutMp4ForEach(value2.intValue(), duration, frame[i], resolution[i]);
             }
             System.out.println("File Cut Complete");
+            return this.inputPath;
         }
     }
 
+    //첫번재부터 마지막까지
     private void cutMp4ForEach(Integer index, String frame , String resolution){
 
         File file = new File(outputPath + frame + "/");
@@ -78,6 +81,7 @@ public class FfmpegService {
         excutor.createJob(builder).run();
     }
 
+    //마지막 인덱스부터 맨 마지막 잔여시간까지
     private void cutMp4ForEach(Integer index, Double lastDuration, String frame , String resolution){
         File file = new File(outputPath + frame + "/");
         if(!file.exists()){

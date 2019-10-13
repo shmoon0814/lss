@@ -1,6 +1,5 @@
 package i.wanna.mpeg.source;
 
-import i.wanna.mpeg.MPD.SegmentCode.SegmentUrlCode;
 import lombok.NoArgsConstructor;
 
 import java.util.Arrays;

@@ -17,7 +17,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
-
+lo
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -59,6 +59,12 @@
 			<version>1.22</version>
 		</dependency>
 
+		<!-- xml 만드는 라이브러리 이거 좋아보이는디?-->
+		<dependency>
+			<groupId>com.jcabi.incubator</groupId>
+			<artifactId>xembly</artifactId>
+			<version>0.22</version>
+		</dependency>
 
 	</dependencies>
 
