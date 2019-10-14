@@ -1,5 +1,6 @@
 package i.wanna.mpeg.MPD;
 
+import i.wanna.mpeg.model.FfmpegData;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +9,7 @@ import org.xembly.Directives;
 @Getter
 @Setter
 public abstract class AbstractXmlBuiler implements RTSPXmlCreater{
-    private String ori_file_path; //사실 들고있을 필요없는딩 헿
+    private FfmpegData ffmpegData;
     private Directives directives = new Directives();
 
     abstract void directivesBuilder();
@@ -18,5 +19,9 @@ public abstract class AbstractXmlBuiler implements RTSPXmlCreater{
     protected abstract void createPeriod();
     protected abstract void createAdaptaionSet();
 
+    protected String changeDuration(){
+        this.ffmpegData.getMediaPresentationDuration();
+        return "//TODO!!";
+    }
 
 }

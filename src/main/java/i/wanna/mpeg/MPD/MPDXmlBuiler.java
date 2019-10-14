@@ -1,7 +1,9 @@
 package i.wanna.mpeg.MPD;
 
+import i.wanna.mpeg.model.FfmpegData;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.xembly.Directives;
 import org.xembly.ImpossibleModificationException;
 import org.xembly.Xembler;
@@ -12,13 +14,12 @@ import java.io.File;
 @Setter
 public class MPDXmlBuiler extends AbstractXmlBuiler {
 
-    private MPDXmlBuiler(){}
-    private MPDXmlBuiler(String ori_file_path){
-        super.setOri_file_path(ori_file_path);
+    private MPDXmlBuiler(FfmpegData FfmpegData){
+        super.setFfmpegData(FfmpegData);
     }
 
-    public static AbstractXmlBuiler builder(String ori_file_path){
-        return new MPDXmlBuiler(ori_file_path);
+    public static AbstractXmlBuiler builder(FfmpegData FfmpegData){
+        return new MPDXmlBuiler(FfmpegData);
     }
 
     //TODO Reactive Programming 변경
@@ -38,15 +39,9 @@ public class MPDXmlBuiler extends AbstractXmlBuiler {
         }
     }
 
-//    String xml = new Xembler(
-//            new Directives()
-//                    .add("root")
-//                    .add("order")
-//                    .attr("id", "553")
-//                    .set("$140.00")
-//    ).xml();
     @Override
     protected void createHeader(){
+        Double duration = super.getFfmpegData().getMediaPresentationDuration();
         super.getDirectives()
                 .add("MPD")
                 .attr("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance")
@@ -54,8 +49,8 @@ public class MPDXmlBuiler extends AbstractXmlBuiler {
                 .attr("xsi:schemaLocation","urn:mpeg:DASH:schema:MPD:2011")
                 .attr("profiles","urn:mpeg:dash:profile:isoff-main:2011")
                 .attr("type","static")
-                .attr("mediaPresentationDuration","PT0H9M56.46S")
-                .attr("minBufferTime","PT20.0S")
+                .attr("mediaPresentationDuration",super.changeDuration())
+                .attr("minBufferTime","PT"+super.getFfmpegData().getMinBufferTime()+"S")
         ;
     }
 
@@ -77,10 +72,10 @@ public class MPDXmlBuiler extends AbstractXmlBuiler {
     @Override
     public String makeXmlString(String ori_file_path){
         try{
-            System.out.println("Original File Path == " + super.getOri_file_path());
-            File file = new File(super.getOri_file_path());
+            System.out.println("Original File Path == " + super.getFfmpegData().getOri_file_path());
+            File file = new File(super.getFfmpegData().getOri_file_path());
             if(!file.exists()){
-                System.err.println("File not exist. file Path == " + super.getOri_file_path());
+                System.err.println("File not exist. file Path == " + super.getFfmpegData().getOri_file_path());
             }
             this.directivesBuilder();
         }catch (Exception e){

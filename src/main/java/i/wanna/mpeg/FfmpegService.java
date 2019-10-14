@@ -2,6 +2,9 @@ package i.wanna.mpeg;
 
 import com.coremedia.iso.IsoFile;
 import com.googlecode.mp4parser.FileDataSourceImpl;
+import i.wanna.mpeg.model.FfmpegData;
+import lombok.Setter;
+import lombok.Getter;
 import net.bramp.ffmpeg.FFmpeg;
 import net.bramp.ffmpeg.FFmpegExecutor;
 import net.bramp.ffmpeg.FFprobe;
@@ -10,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 
+@Getter
+@Setter
 @Service
 public class FfmpegService {
 
@@ -41,11 +46,9 @@ public class FfmpegService {
         //비트레이트가 화질의 수이다....
     }
 
-    public String wrapper() throws Exception {
+    public FfmpegData wrapper() throws Exception {
         double duration = checkFile();
-        if(duration < 100){
-            return "DONE";
-        }else{
+        if(duration >= 100){
             double value = duration / cutDuration;
             Double value2 = Math.floor(value);
             //TODO 인덱스 확인해서 다시돌리세요 쉽세야...
@@ -55,9 +58,13 @@ public class FfmpegService {
                 }
                 cutMp4ForEach(value2.intValue(), duration, frame[i], resolution[i]);
             }
-            System.out.println("File Cut Complete");
-            return this.inputPath;
         }
+        return FfmpegData.builder()
+                .mediaPresentationDuration(duration)
+                .minBufferTime(cutDuration)
+                .ori_file_path(inputPath)
+                .output_path(outputPath)
+            .build();
     }
 
     //첫번재부터 마지막까지
